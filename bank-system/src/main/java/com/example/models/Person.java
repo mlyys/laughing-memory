@@ -6,11 +6,10 @@ public class Person {
     private String id;
     private String name;
     private int age;
-    private ArrayList<BankAccount> bankAccounts;
+    private ArrayList<BankAccount> bankAccounts = new ArrayList<>();
 
     public void addAccount(BankAccount account){
-        BankAccount newAccount = new BankAccount();
-        bankAccounts.add(newAccount);
+        bankAccounts.add(account);
     }
 
     public BankAccount findAccount(String accountNumber){
