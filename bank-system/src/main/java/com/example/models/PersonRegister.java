@@ -1,5 +1,7 @@
 package com.example.models;
 
-public class PersonRegister {
+import java.util.ArrayList;
 
+public class PersonRegister {
+    ArrayList<Person> persons;
 }
