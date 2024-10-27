@@ -44,4 +44,12 @@ public class PersonRegister {
     public void setPersons(ArrayList<Person> persons) {
         this.persons = persons;
     }
+
+    public ArrayList<BankAccount> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(ArrayList<BankAccount> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
 }

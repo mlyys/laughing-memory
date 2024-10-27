@@ -25,6 +25,11 @@ public class BankAccount {
         }
     }
 
+    public BankAccount(String accountNumber, double balance){
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
