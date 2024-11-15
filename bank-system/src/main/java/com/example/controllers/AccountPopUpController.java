@@ -1,9 +1,13 @@
+package com.example.controllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import com.example.models.PersonRegister;
 
 public class AccountPopUpController {
+    private PersonRegister personRegister;
 
     @FXML
     private Button btnAdd;
@@ -13,6 +17,10 @@ public class AccountPopUpController {
 
     @FXML
     private TextField textFieldBalance;
+
+    public void setPersonRegister(PersonRegister personRegister) {
+        this.personRegister = personRegister;
+        }
 
     @FXML
     void handleAccountNo(ActionEvent event) {
@@ -28,5 +36,6 @@ public class AccountPopUpController {
     void handleBalance(ActionEvent event) {
 
     }
+    
 
 }

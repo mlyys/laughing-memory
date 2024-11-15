@@ -1,11 +1,15 @@
+package com.example.controllers;
+
+import com.example.models.PersonRegister;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-
+import com.example.models.PersonRegister;
 public class MainViewController {
-
+    private PersonRegister personRegister;
     @FXML
     private Button btnAddAccount;
 
@@ -29,6 +33,11 @@ public class MainViewController {
 
     @FXML
     private TextField textFieldSearch;
+
+    
+    public void setPersonRegister(PersonRegister personRegister) {
+        this.personRegister = personRegister;
+        }
 
     @FXML
     void handleAddAccount(ActionEvent event) {

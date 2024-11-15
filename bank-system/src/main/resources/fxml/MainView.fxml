@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="403.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="403.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "com.example.controller.MainViewController">
    <children>
       <TableView layoutX="27.0" layoutY="72.0" prefHeight="200.0" prefWidth="546.0">
          <columns>
@@ -20,8 +20,8 @@
       </TableView>
       <Button fx:id="btnAddPerson" layoutX="384.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleAddPerson" text="Add person" />
       <Button fx:id="btnRemovePerson" layoutX="473.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleRemovePerson" prefHeight="25.0" prefWidth="100.0" text="Remove person" />
-      <Label layoutX="27.0" layoutY="41.0" text="Search:" />
-      <TextField fx:id="textFieldSearch" layoutX="73.0" layoutY="37.0" onAction="#handleSearch" prefHeight="25.0" prefWidth="181.0" />
+      <Label layoutX="28.0" layoutY="42.0" text="Search:" />
+      <TextField fx:id="textFieldSearch" layoutX="73.0" layoutY="37.0" onAction="#handleSearch" prefHeight="25.0" prefWidth="181.0" promptText="Search by person's name or ID" />
       <Button fx:id="btnAddAccount" layoutX="28.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleAddAccount" text="Add account" />
       <Button fx:id="btnManageAccount" layoutX="28.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleManageAccount" prefHeight="25.0" prefWidth="113.0" text="Manage account" />
    </children>

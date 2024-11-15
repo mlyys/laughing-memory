@@ -1,10 +1,14 @@
+package com.example.controllers;
+
+import com.example.models.PersonRegister;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import com.example.models.PersonRegister;
 public class PersonPopUpController {
-
+    private PersonRegister personRegister;
     @FXML
     private Button btnAdd;
 
@@ -16,6 +20,11 @@ public class PersonPopUpController {
 
     @FXML
     private TextField textfieldName;
+
+    
+    public void setPersonRegister(PersonRegister personRegister) {
+        this.personRegister = personRegister;
+        }
 
     @FXML
     void handleBtnAdd(ActionEvent event) {
