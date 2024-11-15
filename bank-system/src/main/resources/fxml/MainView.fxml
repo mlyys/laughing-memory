@@ -11,18 +11,18 @@
    <children>
       <TableView layoutX="27.0" layoutY="72.0" prefHeight="200.0" prefWidth="546.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="Age" />
-            <TableColumn prefWidth="100.0" text="Account number" />
-            <TableColumn prefWidth="75.0" text="Balance" />
+            <TableColumn fx:id="tableID" prefWidth="93.99996948242188" text="ID" />
+            <TableColumn fx:id="tableName" prefWidth="103.33328247070312" text="Name" />
+            <TableColumn fx:id="tableAge" prefWidth="58.66668701171875" text="Age" />
+            <TableColumn prefWidth="157.99993896484375" text="Account number" />
+            <TableColumn prefWidth="138.66668701171875" text="Balance" />
          </columns>
       </TableView>
-      <Button layoutX="379.0" layoutY="281.0" mnemonicParsing="false" text="Add person" />
-      <Button layoutX="473.0" layoutY="281.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Remove person" />
+      <Button fx:id="btnAddPerson" layoutX="384.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleAddPerson" text="Add person" />
+      <Button fx:id="btnRemovePerson" layoutX="473.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleRemovePerson" prefHeight="25.0" prefWidth="100.0" text="Remove person" />
       <Label layoutX="27.0" layoutY="41.0" text="Search:" />
-      <TextField layoutX="73.0" layoutY="37.0" />
-      <Button layoutX="31.0" layoutY="281.0" mnemonicParsing="false" text="Add account" />
-      <Button layoutX="31.0" layoutY="321.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Manage account" />
+      <TextField fx:id="textFieldSearch" layoutX="73.0" layoutY="37.0" onAction="#handleSearch" prefHeight="25.0" prefWidth="181.0" />
+      <Button fx:id="btnAddAccount" layoutX="28.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleAddAccount" text="Add account" />
+      <Button fx:id="btnManageAccount" layoutX="28.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleManageAccount" prefHeight="25.0" prefWidth="113.0" text="Manage account" />
    </children>
 </AnchorPane>

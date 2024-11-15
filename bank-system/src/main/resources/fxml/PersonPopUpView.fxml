@@ -5,15 +5,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="38.0" layoutY="39.0" text="ID:" />
       <Label layoutX="33.0" layoutY="82.0" text="Name:" />
       <Label layoutX="38.0" layoutY="124.0" text="Age:" />
-      <TextField layoutX="84.0" layoutY="35.0" />
-      <TextField layoutX="84.0" layoutY="78.0" />
-      <TextField layoutX="83.0" layoutY="120.0" />
-      <Button layoutX="84.0" layoutY="196.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="Add" />
+      <TextField fx:id="textFieldID" layoutX="84.0" layoutY="35.0" onAction="#handleTextFieldID" />
+      <TextField fx:id="textfieldName" layoutX="84.0" layoutY="78.0" onAction="#handleTextFieldName" />
+      <TextField fx:id="textfieldAge" layoutX="83.0" layoutY="120.0" onAction="#handleTextFieldAge" />
+      <Button fx:id="btnAdd" layoutX="84.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleBtnAdd" prefHeight="25.0" prefWidth="51.0" text="Add" />
    </children>
 </AnchorPane>
