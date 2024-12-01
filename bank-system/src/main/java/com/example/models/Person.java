@@ -2,14 +2,18 @@ package com.example.models;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Person {
     private String id;
     private String name;
     private int age;
-    private ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+    private ObservableList<BankAccount> bankAccounts;
 
     public void addAccount(BankAccount account){
-        bankAccounts.add(account);
+        this.bankAccounts.add(account);
+        account.setPerson(this);
     }
 
     public BankAccount findAccount(String accountNumber){
@@ -39,18 +43,15 @@ public class Person {
         this.id = id;
     }
 
-    public ArrayList<BankAccount> getBankAccounts() {
-        return bankAccounts;
-    }
-
-    public void setBankAccounts(ArrayList<BankAccount> bankAccounts) {
-        this.bankAccounts = bankAccounts;
-    }
+    public ObservableList<BankAccount> getBankAccounts() {
+        return FXCollections.unmodifiableObservableList(bankAccounts);
+        }
 
     public Person (String id, String name, int age) {
         this.id=id;
         this.name = name;
         this.age = age;
+        this.bankAccounts = FXCollections.observableArrayList();
     }
 
     public String getName() {
@@ -68,5 +69,14 @@ public class Person {
     public void setAge(int age){
         this.age = age;
     }
+
+        /* public ArrayList<BankAccount> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(ArrayList<BankAccount> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
+*/
 
 }

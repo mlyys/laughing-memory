@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.example.models.BankAccount;
 import com.example.models.Person;
-import com.example.models.PersonAccount;
 import com.example.models.PersonRegister;
 
 import javafx.collections.FXCollections;
@@ -40,19 +39,19 @@ public class MainViewController {
     private Button btnRemovePerson;
 
     @FXML
-    private TableView<PersonAccount> tableViewPersons;
+    private TableView<Person> tableViewPersons;
 
     @FXML
     private TableView<BankAccount> tableViewAccounts;
 
     @FXML
-    private TableColumn<PersonAccount, Integer> tableAge;
+    private TableColumn<Person, Integer> tableAge;
 
     @FXML
-    private TableColumn<PersonAccount, String> tableID;
+    private TableColumn<Person, String> tableID;
 
     @FXML
-    private TableColumn<PersonAccount, String> tableName;
+    private TableColumn<Person, String> tableName;
 
     @FXML
     private TableColumn<BankAccount, String> tableAccountNo;
@@ -63,42 +62,50 @@ public class MainViewController {
     @FXML
     private TextField textFieldSearch;
 
-    public void setPersonRegister(PersonRegister personRegister) {
-        this.personRegister = personRegister;
-        ObservableList<PersonAccount> personAccountList = FXCollections.observableArrayList();
-        tableViewPersons.setItems(personRegister.getPersonAccounts());
-    }
 
     @FXML
     public void initialize() {
+        personRegister = new PersonRegister();
+        // Set sample data for testing
+       
         tableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tableAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         tableID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableViewPersons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-       // tableViewAccounts.setItems(personRegister.getBankAccounts());
-        // Sample data setup
-          personRegister = new PersonRegister();
-          Person person1 = new Person("A001", "Anna", 30);
-          person1.addAccount(new BankAccount("12345", 5000.0));
-          person1.addAccount(new BankAccount("67890", 10000.0));
-          
-          Person person2 = new Person("J001", "John", 40);
-          person2.addAccount(new BankAccount("54321", 7000.0));
-  
-          personRegister.addPerson(person1);
-          personRegister.addPerson(person2);
-        // Set sample data for testing
+
+        tableAccountNo.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
+        tableBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        tableViewAccounts.setItems(personRegister.getBankAccounts());
         setPersonRegister(personRegister);
-       // tableViewPersons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
-      private void showAlert(String title, String message) {
+    public void setPersonRegister(PersonRegister personRegister) {
+        this.personRegister = personRegister;
+       // tableViewPersons.setItems(personRegister.getPersons());
+        //tableViewAccounts.setItems(personRegister.getBankAccounts());
+
+        populatePersonTableView();
+        populateAccountTableView();
+    }
+
+    private void populatePersonTableView() {
+        tableViewPersons.getItems().clear();
+        tableViewPersons.setItems(personRegister.getPersons());
+    }
+
+    private void populateAccountTableView() {
+        tableViewAccounts.getItems().clear();
+        tableViewAccounts.setItems(personRegister.getBankAccounts());
+    }
+/* 
+    private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
+    */
 
     @FXML
     void handleAddAccount(ActionEvent event) {
@@ -173,5 +180,5 @@ public class MainViewController {
     @FXML
     void handleAddWithdraw(ActionEvent event) {
 
-}
+    }
 }
