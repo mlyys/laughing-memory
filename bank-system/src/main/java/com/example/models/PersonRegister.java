@@ -2,6 +2,9 @@ package com.example.models;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class PersonRegister {
     private ArrayList<Person> persons = new ArrayList<>();
     private ArrayList<BankAccount> bankAccounts = new ArrayList<>();
@@ -51,5 +54,16 @@ public class PersonRegister {
 
     public void setBankAccounts(ArrayList<BankAccount> bankAccounts) {
         this.bankAccounts = bankAccounts;
+    }
+
+        public ObservableList<PersonAccount> getPersonAccounts() {
+        ObservableList<PersonAccount> personAccounts = FXCollections.observableArrayList();
+        for (Person person : persons) {
+            for (BankAccount account : person.getBankAccounts()) {
+                personAccounts.add(new PersonAccount(
+                    person, account));
+            }
+        }
+        return personAccounts;
     }
 }

@@ -3,6 +3,7 @@ package com.example;
 import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -26,7 +27,7 @@ public class App extends Application {
         // Create a new FXMLLoader with the location of the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(location);
         // Load the FXML file to create the UI layout as defined in MainView.fxml
-        AnchorPane root = fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         // Get the controller associated with the FXML file
         // that has been automatically instantiated by the FXMLLoader
         MainViewController controller = fxmlLoader.getController();
