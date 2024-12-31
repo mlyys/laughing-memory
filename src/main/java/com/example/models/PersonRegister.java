@@ -69,7 +69,7 @@ public class PersonRegister {
      * }
      */
 
-    private void addTestData() {
+    public void addTestData() {
         Person person1 = new Person("A001", "Anna", 31);
         BankAccount account1 = new BankAccount("12345", 5000.0);
         BankAccount account2 = new BankAccount("67890", 10000.0);
