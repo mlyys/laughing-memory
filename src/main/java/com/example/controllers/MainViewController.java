@@ -44,6 +44,12 @@ public class MainViewController {
     private Button btnRemovePerson;
 
     @FXML
+    private Button btnDeposit;
+
+    @FXML
+    private Button btnWithdraw;
+
+    @FXML
     private TableView<Person> tableViewPersons;
 
     @FXML
@@ -66,6 +72,9 @@ public class MainViewController {
 
     @FXML
     private TextField textFieldSearch;
+
+    @FXML
+    private TextField textFieldAmount;
 
     @FXML
     private TabPane tabPane;
@@ -204,7 +213,17 @@ public class MainViewController {
     }
 
     @FXML
-    void handleAddWithdraw(ActionEvent event) {
+    void handleTextFieldAmount(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleWithdrawBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleDepositBtn(ActionEvent event) {
 
     }
 
