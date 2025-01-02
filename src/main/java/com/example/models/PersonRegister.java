@@ -16,13 +16,13 @@ public class PersonRegister {
     }
 
     public ObservableList<Person> getPersons() {
-        //return this.persons; // FOR TESTING
+        // return this.persons; // FOR TESTING
         return FXCollections.unmodifiableObservableList(this.persons);
     }
 
     public ObservableList<BankAccount> getBankAccounts() {
-        return this.bankAccounts; // FOR TESTING
-       // return FXCollections.unmodifiableObservableList(this.bankAccounts);
+        // return this.bankAccounts; // FOR TESTING
+        return FXCollections.unmodifiableObservableList(this.bankAccounts);
     }
 
     public void addPerson(Person person) {
@@ -77,7 +77,7 @@ public class PersonRegister {
         account2.setPerson(person1);
         person1.addAccount(account1); // Associate accounts with the person
         person1.addAccount(account2);
-    
+
         Person person2 = new Person("J001", "John", 47);
         BankAccount account3 = new BankAccount("54321", 7000.0);
         person2.addAccount(account3);
@@ -88,6 +88,11 @@ public class PersonRegister {
         person3.addAccount(account4);
         account4.setPerson(person3);
 
+        // Bank accounts without owners
+        BankAccount account5 = new BankAccount("11000", 500000.0);
+        BankAccount account6 = new BankAccount("22000", 10000.0);
+        BankAccount account7 = new BankAccount("33000", 2500.0);
+
         persons.add(person1);
         persons.add(person2);
         persons.add(person3);
@@ -96,8 +101,9 @@ public class PersonRegister {
         bankAccounts.add(account2);
         bankAccounts.add(account3);
         bankAccounts.add(account4);
-
-
+        bankAccounts.add(account5);
+        bankAccounts.add(account6);
+        bankAccounts.add(account7);
 
     }
 

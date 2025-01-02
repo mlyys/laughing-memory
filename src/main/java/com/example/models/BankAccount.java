@@ -25,7 +25,7 @@ public class BankAccount {
         }
     }
 
-    public BankAccount(String accountNumber, double balance){
+    public BankAccount(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.person = null;

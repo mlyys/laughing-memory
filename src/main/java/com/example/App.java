@@ -30,13 +30,13 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load());
         /*
-        * After fxmlLoader.load() has been called, the controller
-        * can be retrieved from the FXMLLoader instance.
-        */
+         * After fxmlLoader.load() has been called, the controller
+         * can be retrieved from the FXMLLoader instance.
+         */
         MainViewController controller = fxmlLoader.getController();
         /*
-        * The ProjectRegister instance is passed to the controller.
-        */
+         * The ProjectRegister instance is passed to the controller.
+         */
         controller.setPersonRegister(personRegister);
         // Create a scene with the main view root node and set it on the primary stage
         primaryStage.setScene(scene);
@@ -44,16 +44,14 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    
-    
-    }
-    
+}
 
-            /*Parent root = loader.load();
-            T controller = loader.getController();
-            if (controller instanceof PersonRegisterAware) {
-                ((PersonRegisterAware) controller).setPersonRegister(personRegister);
-            }
-            return controller;
-            */
-    //}
+/*
+ * Parent root = loader.load();
+ * T controller = loader.getController();
+ * if (controller instanceof PersonRegisterAware) {
+ * ((PersonRegisterAware) controller).setPersonRegister(personRegister);
+ * }
+ * return controller;
+ */
+// }

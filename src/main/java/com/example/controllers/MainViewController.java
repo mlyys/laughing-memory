@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,11 +26,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 public class MainViewController {
     private PersonRegister personRegister;
 
-     @FXML
+    @FXML
     private Parent root;
     @FXML
     private Button btnAddAccount;
@@ -67,7 +67,14 @@ public class MainViewController {
     @FXML
     private TextField textFieldSearch;
 
-    
+    @FXML
+    private TabPane tabPane;
+
+    @FXML
+    private Tab tabAccountOwners;
+
+    @FXML
+    private Tab tabBankAccounts;
 
     public void setPersonRegister(PersonRegister personRegister) {
         this.personRegister = personRegister;
@@ -76,32 +83,49 @@ public class MainViewController {
         }
     }
 
-
-
-
     @FXML
     public void initialize() {
         tableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tableAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         tableID.setCellValueFactory(new PropertyValueFactory<>("id"));
-       
+
         tableAccountNo.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
-        tableBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));    
-      
+        tableBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+            // observable: the observablevalue that is being observed, oldTab: the tab that
+            // was previously selected, newTab: the tab that is now selected
+            if (newTab == tabAccountOwners) {
+                populateAccountOwnersTable();
+            } else if (newTab == tabBankAccounts) {
+                populateBankAccountsTable();
+            }
+        });
+
+        // Populate the initial tab (Account Owners)
+        populateAccountOwnersTable();
+        Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
+
+        if (selectedPerson == null) {
+            btnAddAccount.disableProperty().bind(
+                    tableViewPersons.getSelectionModel().selectedItemProperty().isNull());
+        }
+
     }
 
-    private void populateTableView() {
-        tableViewPersons.getItems().clear();
-        tableViewPersons.setItems(personRegister.getPersons());
+    private void populateAccountOwnersTable() {
+        if (personRegister != null && tableViewPersons != null) {
+            tableViewPersons.setItems(personRegister.getPersons());
         }
+    }
 
-        public void setProjectRegister(PersonRegister personRegister) {
-        this.personRegister = personRegister;
-        populateTableView();
-        //populateComboBox();
+    private void populateBankAccountsTable() {
+        if (personRegister != null && tableViewAccounts != null) {
+            tableViewAccounts.setItems(personRegister.getBankAccounts());
         }
+    }
 
-      private void showAlert(String title, String message) {
+    private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -111,30 +135,21 @@ public class MainViewController {
 
     @FXML
     void handleAddAccount(ActionEvent event) {
-     
-     try {
-FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddAccountPopUpView.fxml"));
-Stage modalStage = new Stage();
-modalStage.setScene(new Scene(loader.load()));
-AddAccountPopUpController controller = loader.getController();
-controller.setPersonRegister(personRegister);
-modalStage.setTitle("Add Account");
-modalStage.initModality(Modality.APPLICATION_MODAL);
-Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
-modalStage.initOwner(currentStage);
-modalStage.showAndWait();
-} catch (IOException e) {
-/*
-* We cannot really explain
-* IOException to the user, and
-* they cannot correct issues
-* related to missing fxml files
-* so we just show a generic error
-*/
-String errorMessage = "An error occurred. Please try again.";
-showAlert("Error", errorMessage);
-}
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddAccountPopUpView.fxml"));
+            Stage modalStage = new Stage();
+            modalStage.setScene(new Scene(loader.load()));
+            AddAccountPopUpController controller = loader.getController();
+            controller.setPersonRegister(personRegister);
+            modalStage.setTitle("Add Account");
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
+            modalStage.initOwner(currentStage);
+            modalStage.showAndWait();
+        } catch (IOException e) {
+            String errorMessage = "An error occurred. Please try again.";
+            showAlert("Error", errorMessage);
+        }
 
     }
 
@@ -151,18 +166,11 @@ showAlert("Error", errorMessage);
             Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
             modalStage.initOwner(currentStage);
             modalStage.showAndWait();
-            } catch (IOException e) {
-            /*
-            * We cannot really explain
-            * IOException to the user, and
-            * they cannot correct issues
-            * related to missing fxml files
-            * so we just show a generic error
-            */
+        } catch (IOException e) {
             String errorMessage = "An error occurred. Please try again.";
             showAlert("Error", errorMessage);
-            }
-            
+        }
+
     }
 
     @FXML
@@ -178,18 +186,11 @@ showAlert("Error", errorMessage);
             Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
             modalStage.initOwner(currentStage);
             modalStage.showAndWait();
-            } catch (IOException e) {
-            /*
-            * We cannot really explain
-            * IOException to the user, and
-            * they cannot correct issues
-            * related to missing fxml files
-            * so we just show a generic error
-            */
+        } catch (IOException e) {
             String errorMessage = "An error occurred. Please try again.";
             showAlert("Error", errorMessage);
-            }
-            
+        }
+
     }
 
     @FXML
@@ -205,8 +206,6 @@ showAlert("Error", errorMessage);
     @FXML
     void handleAddWithdraw(ActionEvent event) {
 
-}
-
-
+    }
 
 }

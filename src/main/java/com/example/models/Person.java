@@ -11,28 +11,27 @@ public class Person {
     private int age;
     private ObservableList<BankAccount> bankAccounts;
 
-    public void addAccount(BankAccount account){
+    public void addAccount(BankAccount account) {
         bankAccounts.add(account);
     }
 
-    public BankAccount findAccount(String accountNumber){
-        for (BankAccount account: bankAccounts) {
+    public BankAccount findAccount(String accountNumber) {
+        for (BankAccount account : bankAccounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 return account;
             }
         }
-        return null; 
+        return null;
     }
 
     public double calculateTotalBalance() {
         double balance = 0.0;
-        for (BankAccount account: bankAccounts) {
+        for (BankAccount account : bankAccounts) {
             balance += account.getBalance();
         }
         return balance;
 
     }
-
 
     public String getId() {
         return id;
@@ -43,7 +42,7 @@ public class Person {
     }
 
     public ObservableList<BankAccount> getBankAccounts() {
-       // return bankAccounts;
+        // return bankAccounts;
         return FXCollections.unmodifiableObservableList(bankAccounts);
     }
 
@@ -51,8 +50,8 @@ public class Person {
         this.bankAccounts = bankAccounts;
     }
 
-    public Person (String id, String name, int age) {
-        this.id=id;
+    public Person(String id, String name, int age) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.bankAccounts = FXCollections.observableArrayList();
@@ -62,15 +61,15 @@ public class Person {
         return name;
     }
 
-    public void setName (String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getAge(){
+    public int getAge() {
         return age;
     }
 
-    public void setAge(int age){
+    public void setAge(int age) {
         this.age = age;
     }
 
