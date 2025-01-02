@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import com.example.models.PersonRegister;
 
-public class PersonPopUpController implements PersonRegisterAware{
+public class PersonPopUpController {
     private PersonRegister personRegister;
     @FXML
     private Button btnAdd;
@@ -49,8 +49,10 @@ public class PersonPopUpController implements PersonRegisterAware{
                 int validAge = Integer.parseInt(age);
                 Person person = new Person(id, name, validAge);
                 BankAccount account = new BankAccount(null, 0);
+                person.addAccount(account);
                 personRegister.addPerson(person);
                 showSuccessMessage("Success", "Person added successfully.");
+                System.out.println(personRegister.getPersons().get(3).getName());
             } else {
                 StringBuilder errorMessage = new StringBuilder("Invalid input:\n");
                 if (ageCheck != null) {
@@ -148,8 +150,5 @@ public class PersonPopUpController implements PersonRegisterAware{
     }
     
     
-    @Override
-    public void setRootNode(Parent root) {
-        this.rootNode = root;
-}
+
 }

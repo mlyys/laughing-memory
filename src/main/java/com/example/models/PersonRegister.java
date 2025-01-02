@@ -16,8 +16,8 @@ public class PersonRegister {
     }
 
     public ObservableList<Person> getPersons() {
-        return this.persons; // FOR TESTING
-       // return FXCollections.unmodifiableObservableList(this.persons);
+        //return this.persons; // FOR TESTING
+        return FXCollections.unmodifiableObservableList(this.persons);
     }
 
     public ObservableList<BankAccount> getBankAccounts() {
@@ -69,7 +69,7 @@ public class PersonRegister {
      * }
      */
 
-    public void addTestData() {
+    private void addTestData() {
         Person person1 = new Person("A001", "Anna", 31);
         BankAccount account1 = new BankAccount("12345", 5000.0);
         BankAccount account2 = new BankAccount("67890", 10000.0);

@@ -22,10 +22,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class MainViewController implements PersonRegisterAware {
+public class MainViewController {
     private PersonRegister personRegister;
 
      @FXML
@@ -76,14 +77,6 @@ public class MainViewController implements PersonRegisterAware {
     }
 
 
-    public Parent getRoot() {
-        return root;
-    }
-    @Override
-    public void setRootNode(Parent root) {
-        this.root = root;
-    }
-
 
 
     @FXML
@@ -92,20 +85,21 @@ public class MainViewController implements PersonRegisterAware {
         tableAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         tableID.setCellValueFactory(new PropertyValueFactory<>("id"));
        
+        tableAccountNo.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
+        tableBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));    
       
-         // Only initialize personRegister if it hasn't been set yet
-         if (personRegister == null) {
-            personRegister = new PersonRegister();
-            setPersonRegister(personRegister);
-        } else {
-            // Ensure test data is loaded if personRegister is already set
-            if (personRegister.getPersons().isEmpty()) {
-                personRegister.addTestData();
-            }
-        }
-        tableViewPersons.setItems(personRegister.getPersons());
-        tableViewPersons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
+
+    private void populateTableView() {
+        tableViewPersons.getItems().clear();
+        tableViewPersons.setItems(personRegister.getPersons());
+        }
+
+        public void setProjectRegister(PersonRegister personRegister) {
+        this.personRegister = personRegister;
+        populateTableView();
+        //populateComboBox();
+        }
 
       private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -117,60 +111,85 @@ public class MainViewController implements PersonRegisterAware {
 
     @FXML
     void handleAddAccount(ActionEvent event) {
-        try {
-            // Load the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/AddAccountPopUpView.fxml"));
-            Parent root = fxmlLoader.load();
+     
+     try {
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddAccountPopUpView.fxml"));
+Stage modalStage = new Stage();
+modalStage.setScene(new Scene(loader.load()));
+AddAccountPopUpController controller = loader.getController();
+controller.setPersonRegister(personRegister);
+modalStage.setTitle("Add Account");
+modalStage.initModality(Modality.APPLICATION_MODAL);
+Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
+modalStage.initOwner(currentStage);
+modalStage.showAndWait();
+} catch (IOException e) {
+/*
+* We cannot really explain
+* IOException to the user, and
+* they cannot correct issues
+* related to missing fxml files
+* so we just show a generic error
+*/
+String errorMessage = "An error occurred. Please try again.";
+showAlert("Error", errorMessage);
+}
 
-            // create a new stage
-            Stage stage = new Stage();
-            stage.setTitle("Add Account");
 
-            // set the scene for the stage
-            stage.setScene(new Scene(root));
-            // Show the stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     void handleAddPerson(ActionEvent event) {
         try {
-            // Load the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/PersonPopUpView.fxml"));
-            Parent root = fxmlLoader.load();
-            // create a new stage
-            Stage stage = new Stage();
-            stage.setTitle("Add Account");
-            // set the scene for the stage
-            stage.setScene(new Scene(root));
-            // Show the stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PersonPopUpView.fxml"));
+            Stage modalStage = new Stage();
+            modalStage.setScene(new Scene(loader.load()));
+            PersonPopUpController controller = loader.getController();
+            controller.setPersonRegister(personRegister);
+            modalStage.setTitle("Add Person");
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
+            modalStage.initOwner(currentStage);
+            modalStage.showAndWait();
+            } catch (IOException e) {
+            /*
+            * We cannot really explain
+            * IOException to the user, and
+            * they cannot correct issues
+            * related to missing fxml files
+            * so we just show a generic error
+            */
+            String errorMessage = "An error occurred. Please try again.";
+            showAlert("Error", errorMessage);
+            }
+            
     }
 
     @FXML
     void handleShowAccount(ActionEvent event) {
         try {
-            // Load the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ShowAccountPopUpView.fxml"));
-            Parent root = fxmlLoader.load();
-
-            // create a new stage
-            Stage stage = new Stage();
-            stage.setTitle("View Account");
-
-            // set the scene for the stage
-            stage.setScene(new Scene(root));
-            // Show the stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ShowAccountPopUpView.fxml"));
+            Stage modalStage = new Stage();
+            modalStage.setScene(new Scene(loader.load()));
+            ShowAccountPopUpController controller = loader.getController();
+            controller.setPersonRegister(personRegister);
+            modalStage.setTitle("View Account");
+            modalStage.initModality(Modality.APPLICATION_MODAL);
+            Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
+            modalStage.initOwner(currentStage);
+            modalStage.showAndWait();
+            } catch (IOException e) {
+            /*
+            * We cannot really explain
+            * IOException to the user, and
+            * they cannot correct issues
+            * related to missing fxml files
+            * so we just show a generic error
+            */
+            String errorMessage = "An error occurred. Please try again.";
+            showAlert("Error", errorMessage);
+            }
+            
     }
 
     @FXML

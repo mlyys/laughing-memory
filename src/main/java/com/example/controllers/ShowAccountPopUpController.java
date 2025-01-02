@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import com.example.models.PersonRegister;
-public class ShowAccountPopUpController implements PersonRegisterAware{
+public class ShowAccountPopUpController {
 
     private PersonRegister personRegister;
     @FXML
@@ -17,18 +17,12 @@ public class ShowAccountPopUpController implements PersonRegisterAware{
 
     @FXML
     private Label labelOwner;
-        private Parent rootNode;
-    
-    
-        @Override
+       
         public void setPersonRegister(PersonRegister personRegister) {
             this.personRegister = personRegister;
         }
     
     
-        @Override
-        public void setRootNode(Parent root) {
-            this.rootNode = root;
-    }
+    
 
 }

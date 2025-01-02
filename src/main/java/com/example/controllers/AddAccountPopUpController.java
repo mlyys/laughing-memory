@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import com.example.models.BankAccount;
 import com.example.models.PersonRegister;
 
-public class AddAccountPopUpController implements PersonRegisterAware{
+public class AddAccountPopUpController{
     private PersonRegister personRegister;
 
     @FXML
@@ -26,9 +26,7 @@ public class AddAccountPopUpController implements PersonRegisterAware{
     @FXML
     private ComboBox<String> comboBoxAccounts;
     
-        private Parent rootNode;
-    
-        @Override
+       
         public void setPersonRegister(PersonRegister personRegister) {
             this.personRegister = personRegister;
             populateComboBox();
@@ -72,10 +70,7 @@ public class AddAccountPopUpController implements PersonRegisterAware{
         }
     
       
-        @Override
-        public void setRootNode(Parent root) {
-            this.rootNode = root;
-    }
+  
     
 
 }
