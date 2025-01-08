@@ -6,6 +6,7 @@ import com.example.models.BankAccount;
 import com.example.models.Person;
 import com.example.models.PersonRegister;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -134,12 +135,23 @@ public class MainViewController {
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    private void showAlert(String title, String message, Alert.AlertType alertType) { // ALERT BOX
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+
+    }
+
+    private void showErrorMessage(String title, String message) {
+        showAlert(title, message, Alert.AlertType.ERROR);
+    }
+
+    private void showSuccessMessage(String title, String message) {
+        showAlert(title, message, Alert.AlertType.INFORMATION);
     }
 
     @FXML
@@ -159,7 +171,7 @@ public class MainViewController {
             modalStage.showAndWait();
         } catch (IOException e) {
             String errorMessage = "An error occurred. Please try again.";
-            showAlert("Error", errorMessage);
+            showErrorMessage("Error", errorMessage);
         }
 
     }
@@ -179,7 +191,7 @@ public class MainViewController {
             modalStage.showAndWait();
         } catch (IOException e) {
             String errorMessage = "An error occurred. Please try again.";
-            showAlert("Error", errorMessage);
+            showErrorMessage("Error", errorMessage);
         }
 
     }
@@ -199,14 +211,34 @@ public class MainViewController {
             modalStage.showAndWait();
         } catch (IOException e) {
             String errorMessage = "An error occurred. Please try again.";
-            showAlert("Error", errorMessage);
+            showErrorMessage("Error", errorMessage);
         }
 
     }
 
     @FXML
     void handleRemovePerson(ActionEvent event) {
+        Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            ObservableList<BankAccount> accounts = selectedPerson.getBankAccounts();
+            StringBuilder allAccounts = new StringBuilder();
+            for (BankAccount account : accounts) {
+                allAccounts.append(account.getAccountNumber()).append(",\n");
+            }
+            // Remove the trailing comma and space
+            if (allAccounts.length() > 0) {// checks if allAccounts has any content, if more than 0, account numbers
+                                           // have been appended
+                allAccounts.setLength(allAccounts.length() - 2); // removes the last 2 characters (, ) that were
+                                                                 // appended during looping
+            }
+            String balance = String.valueOf(selectedPerson.calculateTotalBalance());
+            String formatInfo = String.format(
+                    "Bank owner:  %s\n" + "Bank account(s): \n%s\n" + "Total balance:  %s",
+                    selectedPerson.getName(), allAccounts.toString(), balance);
 
+            showSuccessMessage("Success", formatInfo);
+
+        }
     }
 
     @FXML

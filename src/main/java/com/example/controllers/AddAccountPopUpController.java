@@ -55,7 +55,7 @@ public class AddAccountPopUpController {
         if (comboBoxAccounts != null && personRegister != null) {
             ObservableList<String> accountNumbers = FXCollections.observableArrayList();
             for (BankAccount account : personRegister.getBankAccounts()) {
-                accountNumbers.add("Account No: " + account.getAccountNumber());
+                accountNumbers.add(account.getAccountNumber());
             }
             comboBoxAccounts.setItems(accountNumbers);
         }
@@ -100,6 +100,7 @@ public class AddAccountPopUpController {
 
         BankAccount account = personRegister.findAccount(accountNo);
         selectedPerson.addAccount(account);
+        account.setPerson(selectedPerson);
         showSuccessMessage("Success", "Bank account successfully added.");
 
     }

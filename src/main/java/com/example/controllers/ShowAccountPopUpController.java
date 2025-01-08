@@ -23,4 +23,19 @@ public class ShowAccountPopUpController {
         this.personRegister = personRegister;
     }
 
+    @FXML
+    private void labelAccount() {
+
+    }
+
+    @FXML
+    private void labelBalance() {
+
+    }
+
+    @FXML
+    private void labelOwner() {
+
+    }
+
 }
