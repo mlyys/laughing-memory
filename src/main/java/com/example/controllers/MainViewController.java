@@ -144,12 +144,14 @@ public class MainViewController {
 
     @FXML
     void handleAddAccount(ActionEvent event) {
+        Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddAccountPopUpView.fxml"));
             Stage modalStage = new Stage();
             modalStage.setScene(new Scene(loader.load()));
             AddAccountPopUpController controller = loader.getController();
             controller.setPersonRegister(personRegister);
+            controller.setSelectedPerson(selectedPerson);
             modalStage.setTitle("Add Account");
             modalStage.initModality(Modality.APPLICATION_MODAL);
             Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();

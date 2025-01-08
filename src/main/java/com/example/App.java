@@ -45,13 +45,3 @@ public class App extends Application {
     }
 
 }
-
-/*
- * Parent root = loader.load();
- * T controller = loader.getController();
- * if (controller instanceof PersonRegisterAware) {
- * ((PersonRegisterAware) controller).setPersonRegister(personRegister);
- * }
- * return controller;
- */
-// }

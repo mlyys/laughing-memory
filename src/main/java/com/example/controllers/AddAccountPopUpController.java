@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,8 @@ import com.example.models.PersonRegister;
 
 public class AddAccountPopUpController {
     private PersonRegister personRegister;
+
+    private Person selectedPerson;
 
     @FXML
     private Button btnAdd;
@@ -58,11 +61,28 @@ public class AddAccountPopUpController {
         }
     }
 
-    private void showAlert(AlertType error, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    public void setSelectedPerson(Person selectedPerson) {
+        this.selectedPerson = selectedPerson;
+
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType alertType) { // ALERT BOX
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+
+    }
+
+    private void showSuccessMessage(String title, String message) {
+        showAlert(title, message, Alert.AlertType.INFORMATION);
+    }
+
+    private void showErrorMessage(String title, String message) {
+        showAlert(title, message, Alert.AlertType.ERROR);
     }
 
     @FXML
@@ -74,11 +94,14 @@ public class AddAccountPopUpController {
     void handleAddBtn(ActionEvent event) {
         String accountNo = comboBoxAccounts.getSelectionModel().getSelectedItem();
         if (accountNo == null) {
-            showAlert(AlertType.ERROR, "Please select an account number.");
+            showErrorMessage("Error", "Please select an account number.");
             return;
         }
 
-        // BankAccount account = new BankAccount(accountNo, balance);
+        BankAccount account = personRegister.findAccount(accountNo);
+        selectedPerson.addAccount(account);
+        showSuccessMessage("Success", "Bank account successfully added.");
+
     }
 
 }
