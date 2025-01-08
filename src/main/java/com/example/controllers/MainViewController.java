@@ -198,26 +198,6 @@ public class MainViewController {
 
     @FXML
     void handleShowAccount(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ShowAccountPopUpView.fxml"));
-            Stage modalStage = new Stage();
-            modalStage.setScene(new Scene(loader.load()));
-            ShowAccountPopUpController controller = loader.getController();
-            controller.setPersonRegister(personRegister);
-            modalStage.setTitle("View Account");
-            modalStage.initModality(Modality.APPLICATION_MODAL);
-            Stage currentStage = (Stage) tableViewPersons.getScene().getWindow();
-            modalStage.initOwner(currentStage);
-            modalStage.showAndWait();
-        } catch (IOException e) {
-            String errorMessage = "An error occurred. Please try again.";
-            showErrorMessage("Error", errorMessage);
-        }
-
-    }
-
-    @FXML
-    void handleRemovePerson(ActionEvent event) {
         Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
             ObservableList<BankAccount> accounts = selectedPerson.getBankAccounts();
@@ -236,9 +216,14 @@ public class MainViewController {
                     "Bank owner:  %s\n" + "Bank account(s): \n%s\n" + "Total balance:  %s",
                     selectedPerson.getName(), allAccounts.toString(), balance);
 
-            showSuccessMessage("Success", formatInfo);
+            showSuccessMessage("Account details", formatInfo);
 
         }
+    }
+
+    @FXML
+    void handleRemovePerson(ActionEvent event) {
+
     }
 
     @FXML
