@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import com.example.models.BankAccount;
 import com.example.models.Person;
@@ -16,12 +17,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -154,6 +158,10 @@ public class MainViewController {
         showAlert(title, message, Alert.AlertType.INFORMATION);
     }
 
+    private void showWarningMessage(String title, String message) {
+        showAlert(title, message, Alert.AlertType.WARNING);
+    }
+
     @FXML
     void handleAddAccount(ActionEvent event) {
         Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
@@ -223,7 +231,38 @@ public class MainViewController {
 
     @FXML
     void handleRemovePerson(ActionEvent event) {
+        try {
+            Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
+            String message = String.format("Are you sure you want to remove %s (%s)?", selectedPerson.getName(),
+                    selectedPerson.getId());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
 
+            ButtonType buttonYes = new ButtonType("Yes");
+            ButtonType buttonNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonYes, buttonNo);
+
+            // Handle the user's response
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonYes) {
+                // Remove the association between the person and their accounts
+                for (BankAccount account : selectedPerson.getBankAccounts()) {
+                    account.setPerson(null); // Remove the person reference from the account
+                }
+                // Remove the selected person from the ObservableList
+                personRegister.removePerson(selectedPerson);
+                showSuccessMessage("Success", "Person removed successfully.");
+                // System.out.println(selectedPerson.getName() +
+                // selectedPerson.getBankAccounts());
+            } else {
+                showWarningMessage("Action cancelled", "No person selected.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

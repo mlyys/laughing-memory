@@ -25,8 +25,16 @@ public class PersonRegister {
         return FXCollections.unmodifiableObservableList(this.bankAccounts);
     }
 
+    public void removeAccount(BankAccount account) {
+        bankAccounts.remove(account);
+    }
+
     public void addPerson(Person person) {
         persons.add(person);
+    }
+
+    public void removePerson(Person person) {
+        persons.remove(person);
     }
 
     public Person findPerson(String id) {

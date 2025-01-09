@@ -13,7 +13,6 @@ import com.example.controllers.AddAccountPopUpController;
 import com.example.controllers.MainViewController;
 import com.example.controllers.PersonPopUpController;
 
-import com.example.controllers.ShowAccountPopUpController;
 import com.example.models.PersonRegister;
 
 public class App extends Application {
