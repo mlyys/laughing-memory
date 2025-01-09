@@ -48,7 +48,8 @@
 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 </columnResizePolicy>
                   </TableView>
-                  <Label layoutX="272.0" layoutY="40.0" text="Total balance:" />
+                  <Label layoutX="270.0" layoutY="40.0" text="Total balance:" />
+                   <Label layoutX="353" layoutY="40.0" text="null" fx:id="labelBalance" />
                   <TextField fx:id="textFieldAmount" layoutX="102.0" layoutY="279.0" onAction="#handleTextFieldAmount"/>
                   <Button fx:id="btnDeposit" layoutX="333.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleDepositBtn" text="Deposit" />
                   <Button fx:id="btnWithdraw" layoutX="409.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleWithdrawBtn" text="Withdraw" />

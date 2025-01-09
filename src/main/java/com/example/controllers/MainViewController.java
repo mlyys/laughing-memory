@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -86,6 +87,9 @@ public class MainViewController {
     @FXML
     private Tab tabBankAccounts;
 
+    @FXML
+    private Label labelBalance;
+
     public void setPersonRegister(PersonRegister personRegister) {
         this.personRegister = personRegister;
         if (tableViewPersons != null) {
@@ -115,7 +119,6 @@ public class MainViewController {
         // Populate the initial tab (Account Owners)
         populateAccountOwnersTable();
         Person selectedPerson = tableViewPersons.getSelectionModel().getSelectedItem();
-
         if (selectedPerson == null) {
             btnAddAccount.disableProperty().bind(
                     tableViewPersons.getSelectionModel().selectedItemProperty().isNull());
@@ -132,6 +135,7 @@ public class MainViewController {
     private void populateBankAccountsTable() {
         if (personRegister != null && tableViewAccounts != null) {
             tableViewAccounts.setItems(personRegister.getBankAccounts());
+            labelBalance.setText(Double.toString(personRegister.calculateTotalBalance()));
         }
     }
 
@@ -287,6 +291,7 @@ public class MainViewController {
                     selectedAccount.withdraw(amount);
                     showSuccessMessage("Success", "Amount withdrawn successfully.");
                     tableViewAccounts.refresh();
+                    labelBalance.setText(Double.toString(personRegister.calculateTotalBalance()));
                     textFieldAmount.clear();
                 }
             }
@@ -309,6 +314,7 @@ public class MainViewController {
                     selectedAccount.deposit(amount);
                     showSuccessMessage("Success", "Deposited successfully.");
                     tableViewAccounts.refresh();
+                    labelBalance.setText(Double.toString(personRegister.calculateTotalBalance()));
                     textFieldAmount.clear();
                 }
             }
