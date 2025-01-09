@@ -78,7 +78,7 @@ public class PersonRegister {
      */
 
     private void addTestData() {
-        Person person1 = new Person("A001", "Anna", 31);
+        Person person1 = new Person("9405260002", "Anna", 31);
         BankAccount account1 = new BankAccount("12345", 5000.0);
         BankAccount account2 = new BankAccount("67890", 10000.0);
         account1.setPerson(person1); // Set the owner
@@ -86,12 +86,12 @@ public class PersonRegister {
         person1.addAccount(account1); // Associate accounts with the person
         person1.addAccount(account2);
 
-        Person person2 = new Person("J001", "John", 47);
+        Person person2 = new Person("7801031133", "John", 47);
         BankAccount account3 = new BankAccount("54321", 7000.0);
         person2.addAccount(account3);
         account3.setPerson(person2);
 
-        Person person3 = new Person("C022", "Nelly", 22);
+        Person person3 = new Person("0309123478", "Nelly", 22);
         BankAccount account4 = new BankAccount("81938", 500.0);
         person3.addAccount(account4);
         account4.setPerson(person3);

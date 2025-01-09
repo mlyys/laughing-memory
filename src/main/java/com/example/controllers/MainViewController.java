@@ -277,11 +277,48 @@ public class MainViewController {
 
     @FXML
     void handleWithdrawBtn(ActionEvent event) {
+        BankAccount selectedAccount = tableViewAccounts.getSelectionModel().getSelectedItem();
+        try {
+            double amount = Double.parseDouble(textFieldAmount.getText());
+            if (selectedAccount != null && textFieldAmount.getText() != null) {
+                if (amount > selectedAccount.getBalance()) {
+                    showErrorMessage("Error", "Insufficient funds.");
+                    textFieldAmount.clear();
+                } else if (amount <= 0) {
+                    showErrorMessage("Error", "Amount must be positive.");
+                    textFieldAmount.clear();
+                } else {
+                    selectedAccount.withdraw(amount);
+                    showSuccessMessage("Success", "Amount withdrawn successfully.");
+                    tableViewAccounts.refresh();
+                    textFieldAmount.clear();
+                }
+            }
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error", "Invalid. Please enter valid numbers.");
+        }
 
     }
 
     @FXML
     void handleDepositBtn(ActionEvent event) {
+        BankAccount selectedAccount = tableViewAccounts.getSelectionModel().getSelectedItem();
+        try {
+            double amount = Double.parseDouble(textFieldAmount.getText());
+            if (selectedAccount != null && textFieldAmount.getText() != null) {
+                if (amount <= 0) {
+                    showErrorMessage("Error", "Amount must be positive.");
+                    textFieldAmount.clear();
+                } else {
+                    selectedAccount.deposit(amount);
+                    showSuccessMessage("Success", "Deposited successfully.");
+                    tableViewAccounts.refresh();
+                    textFieldAmount.clear();
+                }
+            }
+        } catch (NumberFormatException e) {
+            showErrorMessage("Error", "Invalid. Please enter valid numbers.");
+        }
 
     }
 
